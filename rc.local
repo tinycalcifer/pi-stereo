@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# Turn off power and activity lights
+ctl="/usr/local/bin/ledctl"
+$ctl 0 gpio
+$ctl 1 gpio
+$ctl 0 off
+$ctl 1 off

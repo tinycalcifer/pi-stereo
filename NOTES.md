@@ -285,3 +285,26 @@ sudo apt install shairport-sync
 ```
 
 That should be it; it'll use your hostname as the airport target name (e.g. `Pi-stereo`)
+
+## (optional) Disable the Power and Activity LEDs
+
+I use a transparent Pi case, so the red power and flashing green activity lights were very distracting in a dark room.
+
+See: `ledctl.sh` and `rc.local`
+
+To disable the lights, we have to
+
+1. Change their "trigger" so that they only care about gpio inputs
+2. Tell their GPIO inputs to set brightness to zero
+
+The controls for both these are adjusted by changing the contents of special files in the `/sys/class/leds/` directory. The directory `led0` there contains the controls for the activity light, and `led1` for the power light.
+
+I wrote a script, `ledctl.sh` that can do these things conveniently; see it and the provided `rc.local` script which uses ledctl to disable the LEDs on each boot (since the changes are not persistent). If you use the provided `rc.local`, you need to copy it to `/etc/rc.local` and copy `ledctl.sh` to `/usr/local/bin/ledctl`. You'll also need to:
+
+```bash
+sudo systemctl enable rc-local.service
+```
+
+And ignore the warning block of text it spits out.
+
+
