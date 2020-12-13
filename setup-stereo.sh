@@ -43,7 +43,6 @@ confirmation() {
 	return 1  # just in case we get here somehow, return false by default
 }
 
-sudo 
 
 ## alsa and related tools
 if confirmation "Install pre-requisites (alsa and tools)?"
