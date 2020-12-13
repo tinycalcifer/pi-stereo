@@ -16,7 +16,8 @@ At the following confirmation prompt:
 SPLAIN
 
 confirm="true"
-while true; do read -n 1 -p "Shall we continue? [nyq]" yn
+while true; do 
+	read -n 1 -p "Shall we continue? [nyq]" yn
 	case $yn in
 		[Yy]* ) break;;
 		[Nn]* ) exit 1;;
@@ -31,7 +32,8 @@ sudo="echo /usr/bin/sudo -p \"Requesting sudo rights, your password required: \"
 
 confirmation() {
 	if ! [ "$confirm" ]; then return 0; fi  ## if the confirm flag is not set, exit true
-	while true; do read -n 1 -p "$prompt [yn]" yn
+	while true; do
+		read -n 1 -p "$prompt [yn]" yn
 		case $yn in
 			[Yy]* ) return 0;;
 			[Nn]* ) return 1;;
