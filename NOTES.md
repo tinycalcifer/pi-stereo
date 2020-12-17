@@ -3,6 +3,27 @@
 Create an RPi-based audio streaming client that, when connected to a receiver
 or powered speaker, streams Spotify Connect and AirPlay audio over WiFi.
 
+<!--TOC-->
+
+- [Raspberry Pi 3 B+ audio streamer client](#raspberry-pi-3-b-audio-streamer-client)
+- [6. Dec. 2020](#6-dec-2020)
+  - [Steps](#steps)
+    - [Image the Pi](#image-the-pi)
+    - [Prep for boot](#prep-for-boot)
+    - [First boot and initial config](#first-boot-and-initial-config)
+    - [install updates](#install-updates)
+    - [install a few support packages](#install-a-few-support-packages)
+    - [(optional) install cockpit (web-based admin tool)](#optional-install-cockpit-web-based-admin-tool)
+  - [Setting up `spotifyd` for Spotify Connect](#setting-up-spotifyd-for-spotify-connect)
+    - [Configuring `spotifyd`](#configuring-spotifyd)
+    - [Set spotifyd to start automatically with systemctl](#set-spotifyd-to-start-automatically-with-systemctl)
+  - [Setup AirPlay target](#setup-airplay-target)
+  - [(optional) Disable the Power and Activity LEDs](#optional-disable-the-power-and-activity-leds)
+- [16. Dec. 2020](#16-dec-2020)
+  - [Setting output to the USB audio device](#setting-output-to-the-usb-audio-device)
+
+<!--TOC-->
+
 # 6. Dec. 2020
 
 Trying out using Ubuntu Server instead of Raspbian. We'll see how this goes.
