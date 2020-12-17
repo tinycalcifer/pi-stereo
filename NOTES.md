@@ -307,4 +307,39 @@ sudo systemctl enable rc-local.service
 
 And ignore the warning block of text it spits out.
 
+# 16. Dec. 2020
 
+Groundloops are a concern; when connecting to an AV system, there is significant "buzz" from the headphone connection on the Pi. After looking at several options for fixing this, it seems the most straightforward is to use a USB sound device with a digital output.
+
+I purchased this [Signstek USB to S/PDIF Converter](https://www.amazon.com/gp/product/B00FEDHHKE) (Amazon link, sorry). This is by far not the only option, it just happened to be the cheapest I could find that:
+
+- Had both coaxial S/PDIF and optical (toslink) out
+- Was driverless under Linux
+- Did not require external power (powered by its USB connection)
+
+It also has analog outputs, which is nice for future reusability.
+
+## Setting output to the USB audio device
+
+If your spotifyd or shairport-sync configurations don't use the system default ALSA output, you may have to adjust those configurations. Otheriwse, you can just set the USB device as your default for ALSA
+
+First, find the device using `aplay -l` and note the device number. Mine was device 1 (the built-in Pi audio is 0). So I created `/etc/asound.conf` with the following contents:
+
+```conf
+defaults.pcm.card 1
+defaults.ctl.card 1
+```
+
+And edited the `/etc/spotifyd.conf` by editing the `mixer =` line to read `mixer = PCM`
+
+Then just
+
+```bash
+sudo systemctl restart alsa-state.service
+sudo systemctl restart spotifyd.service
+sudo systemctl restart shairport-sync.service
+```
+
+Now your audio should route to the USB audio device.
+
+**NOTE** some of these USB audio devices will have separate devices or mixers for the different outputs. If yours does, you might have some additional testing and research to do. The one I bought only has one mixer for everything. 
